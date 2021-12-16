@@ -1,0 +1,36 @@
+
+Most interrupt service routines (ISR) have code at the termination of them which informs the hardware that it has been "serviced." In the case of the keyboard controller, commands are written to it acknowledging the received bytes. 
+It is at the time of acknowledgement that the keyboard controller hardware stops using electricity to signal an interrupt condition.
+If you are handling a non-keyboard interrupt, let's say the fire alarm interrupt, then the keyboard hardware which electrically asserts the interrupt will trigger as the key is pressed.
+The electrical signal is ignored until the CPU has interrupts enabled again. At the end of servicing the fire alarm interrupt, the fire alarm ISR acknowledges whatever data and re-enables interrupts 
+on the CPU. Immediately, the CPU enters an interrupt because the keyboard controller is still electrically signalling an interrupt condition.
+If you are handling a keyboard interrupt, and the user quickly types a second keystroke during the execution of your keyboard ISR, then there is a chance of missing the data from the second keystroke, 
+or of receiving it later if at all. In particular, if the ISR resets the keyboard controller through an acknowledge, but the ISR has not actually received all the available bytes out of the keyboard controller, then that is a problem.
+Often, an ISR will first handle the interrupt which triggered its activation, then after acknowledging the interrupt, poll the device to see if it has received more data since the first interrupt. If so, 
+generate a software interrupt to re-enter the ISR and service the device.
+
+
+Q- How the interrupt could be enabled:-
+There are many situations where the processor should be a request for interruptions. 
+For example, in the case of Compute-Print a request for interruption from print should only be accepted if there are exit lines to be printed. 
+After printing the last line of the n-line set, the interruption should be disabled until another set is available for printing.
+The easiest way is to provide machine instructions, such as unlocking Interrupt and Interruptdisable. Processing computer programs ignore the interruption request 
+line until the initial command of the service interruption program is completed. Then, by using Interrupt-disable-disable as the first in the interrupt-service routine, 
+the program coordinator can ensure that no further interruptions will occur until the Disruption command is implemented. Normally, the interrupt command will be the last 
+command in the interrupt service system before the Return-to-Disruption command. The processor must ensure that the reuse of the interruption order is terminated before any 
+further interruption occurs.
+
+
+
+The interrupts are enabled, in the following:-
+1. The device suggests an interruption request.
+2. The processor interrupts the current system.
+3. Disruption is disabled by switching control components to PS (except in the case of activated interference).
+4. The phone is notified that its request has been detected and, as a result, shuts down the signal for a disruptive request.
+5. An action that is requested to be interrupted is made to the principle of interruption of the service.
+6. Disruptions are enabled and the operation of the interrupted system is restarted.
+
+Q- What happened when the user type a character at the keyboard:
+-The operating system usually keeps the characters in the buffer until the process requires them. Keyboards do not send characters to the computer, 
+they only send key locations. The operating system determines which keys are aligned with the characters, which is why it is possible to modify keyboard 
+layouts without physically changing the keyboard.

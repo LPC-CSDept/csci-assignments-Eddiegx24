@@ -1,0 +1,12 @@
+Memory-mapped I/O uses the same address space to address both memory and I/O devices. 
+Each I/O device monitors the CPU's address bus and responds to any CPU access of an address assigned to that device, 
+connecting the data bus to the desired device's hardware register.
+
+###
+
+The MMIO write operation transmits the data and a portion of the address to the device, and the device uses 
+both quantities to determine how it should change its state.
+MMIO reads are used for two-way communication, causing the device to return a value based on its current state
+
+##
+
